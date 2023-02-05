@@ -53,7 +53,7 @@ class Bot:
                 if result:
                     for message in result:
                         await context.bot.send_message(chat_id=update.effective_chat.id,
-                                                       text=f"{message['id']}. {message['text']}",
+                                                       text=f"{message['id']}\. {message['text']}",
                                                        parse_mode="MarkdownV2")
                 else:
                     await context.bot.send_message(chat_id=update.effective_chat.id, text="No messages found.")
