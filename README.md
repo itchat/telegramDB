@@ -18,7 +18,7 @@ Exit the virtual environment after configuring the relevant dependencies by ente
 ### .gitignore
 
 ```txt
-# .gitignore
+.gitignore
 
 # Virtual Environment
 venv/

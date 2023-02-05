@@ -6,12 +6,14 @@ db_config = {
     'user': 'username',
     'password': 'password',
     'db': 'db',
+    # Change the config data above
     'charset': 'utf8',
     'cursorclass': DictCursor
 }
 
-authorized = [user_id]
+# user_id: int
+authorized = [123456]
 
-token = 'token'
+token = 'bot_token'
 
 conn = pymysql.connect(**db_config)
