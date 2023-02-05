@@ -1,0 +1,10 @@
+# .gitignore
+
+# Virtual Environment
+venv/
+
+# PyCharm
+.idea/
+
+# Python cache files
+__pycache__/
