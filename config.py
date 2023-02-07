@@ -7,7 +7,7 @@ db_config = {
     'password': 'password',
     'db': 'db',
     # Change the config data above
-    'charset': 'utf8',
+    'charset': 'utf8mb4',
     'cursorclass': DictCursor
 }
 

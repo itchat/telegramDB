@@ -60,3 +60,4 @@ class Bot:
             except IndexError as e:
                 await context.bot.send_message(chat_id=update.effective_chat.id, text="`Ex: /search Messages`",
                                                parse_mode="MarkdownV2")
+
