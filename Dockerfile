@@ -14,4 +14,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 ENV PYTHONUNBUFFERED=1
 
 # Run the command to start the application
+CMD ["mysql", "-uroot", "-p123456", "< tgdb.sql"]
 CMD ["python", "main.py"]
