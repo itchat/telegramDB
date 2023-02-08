@@ -89,6 +89,10 @@ ufw route allow proto tcp from any to any port 3306
 ufw route delete allow proto tcp from any to any port 3306
 ```
 
+```shell
+docker cp tgdb.sql mysql:/root/
+docker exec -t mysql bash -c "mysql -uroot -p123456 < /root/tgdb.sql"
+```
 ## Reference
 
 [Resolving UFW and Docker security issues without disabling iptables](https://chaifeng.com/to-fix-ufw-and-docker-security-flaw-without-disabling-iptables/)
