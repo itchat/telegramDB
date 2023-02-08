@@ -5,12 +5,15 @@
 ### Python Virtual Environment
 
 ```shell
+docker run -itd --name mysql -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7
 pip install virtualenv
 virtualenv venv
 # Windows：
 venv\Scripts\activate
 # Linux/MacOS：
 source venv/bin/activate
+pip install -r requirements.txt
+deactivate
 ```
 
 Exit the virtual environment after configuring the relevant dependencies by entering `deactivate`
@@ -36,14 +39,16 @@ __pycache__/
 vim /etc/systemd/system/telegram.service
 
 [Unit]
-Description=Telegram Notes
+Description=Notes
 After=network.target
 
 [Service]
 User=root
-WorkingDirectory=/root/telegram
+WorkingDirectory=/root/telegramDB
 ExecStart=python3 main.py -venv venv
 Restart=always
+Environment=ID=YOUR_TELEGRAM_ID
+Environment=TOKEN=YOUR_BOT_TOKEN
 
 [Install]
 WantedBy=multi-user.target 
@@ -81,7 +86,7 @@ COMMIT
 ```shell
 systemctl restart ufw
 ufw route allow proto tcp from any to any port 3306
-ufw route delete proto tcp from any to any port 3306
+ufw route delete allow proto tcp from any to any port 3306
 ```
 
 ## Reference
