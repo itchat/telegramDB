@@ -93,6 +93,21 @@ ufw route delete allow proto tcp from any to any port 3306
 docker cp tgdb.sql mysql:/root/
 docker exec -t mysql bash -c "mysql -uroot -p123456 < /root/tgdb.sql"
 ```
+
+```shell
+# Clean all Docker container and images
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -q)
+
+# Create Backup task sh
+docker exec -it mysql bash -c "mysqldump -uroot -p123456 tgdb > tgbackup.sql"
+docker cp mysql:tgbackup.sql /opt/backup
+
+# Crontab
+0 0 * * * /bin/sh /opt/backup.sh
+```
+
 ## Reference
 
 [Resolving UFW and Docker security issues without disabling iptables](https://chaifeng.com/to-fix-ufw-and-docker-security-flaw-without-disabling-iptables/)
