@@ -11,7 +11,7 @@
  Target Server Version : 50741 (5.7.41)
  File Encoding         : 65001
 
- Date: 08/02/2023 08:43:42
+ Date: 09/02/2023 22:41:47
 */
 
 CREATE DATABASE tgdb;
@@ -27,7 +27,7 @@ CREATE TABLE `message`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of message

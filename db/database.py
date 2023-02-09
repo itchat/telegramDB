@@ -42,3 +42,13 @@ class Database:
         except Exception as e:
             logger.error("Error delete in database: %s", e, exc_info=True)
 
+    def read_database(self):
+        try:
+            with self.conn.cursor() as cursor:
+                # RAND() generates a random value for each row in the table
+                sql = "SELECT id, text FROM message ORDER BY rand() LIMIT 10"
+                cursor.execute(sql)
+                result = cursor.fetchall()
+                return result
+        except Exception as e:
+            logger.error("Error read 10 random message in database: %s", e, exc_info=True)

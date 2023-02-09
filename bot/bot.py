@@ -14,6 +14,7 @@ class Bot:
         self.bot.add_handler(CommandHandler("cancel", self.cancel))
         self.bot.add_handler(CommandHandler("search", self.search))
         self.bot.add_handler(CommandHandler("delete", self.delete))
+        self.bot.add_handler(CommandHandler("random", self.random))
         self.bot.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self.save))
         self.bot.run_polling()
 
@@ -53,11 +54,26 @@ class Bot:
                 if result:
                     for message in result:
                         await context.bot.send_message(chat_id=update.effective_chat.id,
+                                                       text=f"__{message['id']}\. {message['text']}__",
+                                                       parse_mode="MarkdownV2")
+                else:
+                    await context.bot.send_message(chat_id=update.effective_chat.id, text="No messages found.")
+            except IndexError as e:
+                await context.bot.send_message(chat_id=update.effective_chat.id, text="`Ex: /search Messages.`",
+                                               parse_mode="MarkdownV2")
+
+    async def random(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        if update.effective_user.id in authorized:
+            try:
+                result = self.db.read_database()
+                # print(result)
+                if result:
+                    for message in result:
+                        print(message)
+                        await context.bot.send_message(chat_id=update.effective_chat.id,
                                                        text=f"{message['id']}\. {message['text']}",
                                                        parse_mode="MarkdownV2")
                 else:
                     await context.bot.send_message(chat_id=update.effective_chat.id, text="No messages found.")
             except IndexError as e:
-                await context.bot.send_message(chat_id=update.effective_chat.id, text="`Ex: /search Messages`",
-                                               parse_mode="MarkdownV2")
-
+                await context.bot.send_message(chat_id=update.effective_chat.id, text=f"{e}", parse_mode="MarkdownV2")
