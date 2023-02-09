@@ -32,7 +32,7 @@ class Bot:
     async def save(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         if update.effective_user.id in authorized:
             if self.batch_save_mode:
-                text = update.message.text_markdown_v2_urled
+                text = f"_{update.message.text}_"
                 self.db.save_to_database(text)
                 await context.bot.send_message(chat_id=update.effective_chat.id, text="Message saved.")
 
@@ -54,7 +54,7 @@ class Bot:
                 if result:
                     for message in result:
                         await context.bot.send_message(chat_id=update.effective_chat.id,
-                                                       text=f"__{message['id']}\. {message['text']}__",
+                                                       text=f"{message['id']}\. {message['text']}",
                                                        parse_mode="MarkdownV2")
                 else:
                     await context.bot.send_message(chat_id=update.effective_chat.id, text="No messages found.")

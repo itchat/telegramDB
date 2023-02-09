@@ -48,6 +48,7 @@ WorkingDirectory=/root/telegramDB
 ExecStart=python3 main.py -venv venv
 Restart=always
 Environment=ID=YOUR_TELEGRAM_ID
+Environment=PASS=YOUR_DATABASE_PASS
 Environment=TOKEN=YOUR_BOT_TOKEN
 
 [Install]

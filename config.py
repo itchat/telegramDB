@@ -3,7 +3,7 @@ import pymysql
 from pymysql.cursors import DictCursor
 
 db_config = {
-    'host': '150.230.108.244',
+    'host': '127.0.0.1',
     'user': os.getenv('USER', 'root'),
     'password': os.getenv("PASS", "123456"),
     'db': os.getenv("DB", "tgdb"),
