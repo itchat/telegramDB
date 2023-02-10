@@ -54,7 +54,6 @@ class Bot:
         if update.effective_user.id in authorized:
             try:
                 result = self.db.search_in_database(context.args[0])
-                print(result, context.args[0])
                 if result:
                     for message in result:
                         await context.bot.send_message(chat_id=update.effective_chat.id,
