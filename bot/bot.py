@@ -33,8 +33,11 @@ class Bot:
         if update.effective_user.id in authorized:
             if self.batch_save_mode:
                 text = update.message.text
-                self.db.save_to_database(text)
-                await context.bot.send_message(chat_id=update.effective_chat.id, text="Message saved.")
+                try:
+                    self.db.save_to_database(text)
+                    await context.bot.send_message(chat_id=update.effective_chat.id, text="Message saved.")
+                except Exception as e:
+                    print(e)
 
     async def cancel(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         if update.effective_user.id in authorized:
@@ -51,13 +54,15 @@ class Bot:
         if update.effective_user.id in authorized:
             try:
                 result = self.db.search_in_database(context.args[0])
+                print(result, context.args[0])
                 if result:
                     for message in result:
                         await context.bot.send_message(chat_id=update.effective_chat.id,
                                                        text=f"_{message['id']}\. {message['text']}_",
                                                        parse_mode="MarkdownV2")
                 else:
-                    await context.bot.send_message(chat_id=update.effective_chat.id, text="No messages found.")
+                    await context.bot.send_message(chat_id=update.effective_chat.id, text="No Messages.",
+                                                   parse_mode="MarkdownV2")
             except IndexError as e:
                 await context.bot.send_message(chat_id=update.effective_chat.id, text="`Ex: /search Messages.`",
                                                parse_mode="MarkdownV2")
@@ -73,5 +78,5 @@ class Bot:
                                                        parse_mode="MarkdownV2")
                 else:
                     await context.bot.send_message(chat_id=update.effective_chat.id, text="No messages found.")
-            except IndexError as e:
+            except Exception as e:
                 await context.bot.send_message(chat_id=update.effective_chat.id, text=f"{e}", parse_mode="MarkdownV2")
