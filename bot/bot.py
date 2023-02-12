@@ -58,7 +58,6 @@ class Bot:
                 if result:
                     for message in result:
                         con = rf"{message['id']}\. {message['text']}"
-                        print(con)
                         await context.bot.send_message(chat_id=update.effective_chat.id,
                                                        text=con,
                                                        parse_mode="MarkdownV2")
@@ -74,11 +73,10 @@ class Bot:
                 if result:
                     for message in result:
                         con = rf"{message['id']}\. {message['text']}"
-                        print(con)
                         await context.bot.send_message(chat_id=update.effective_chat.id,
                                                        text=con,
                                                        parse_mode="MarkdownV2")
                 else:
-                    await context.bot.send_message(chat_id=update.effective_chat.id, text="No messages found.")
+                    await context.bot.send_message(chat_id=update.effective_chat.id, text="No messages.")
             except Exception as e:
                 await context.bot.send_message(chat_id=update.effective_chat.id, text=f"{e}")
