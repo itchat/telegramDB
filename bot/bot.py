@@ -33,7 +33,6 @@ class Bot:
         if update.effective_user.id in authorized:
             if self.batch_save_mode:
                 text = update.message.text_markdown_v2_urled
-                print(text)
                 try:
                     self.db.save_to_database(text)
                     await context.bot.send_message(chat_id=update.effective_chat.id, text="Message saved.")
