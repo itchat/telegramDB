@@ -5,7 +5,6 @@
 ### Python Virtual Environment
 
 ```shell
-docker run -itd --name mysql -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql:8.0
 pip install virtualenv
 virtualenv venv
 # Windows：
@@ -91,6 +90,7 @@ ufw route delete allow proto tcp from any to any port 3306
 ```
 
 ```shell
+docker run -itd --name mysql -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql:8.0
 docker cp tgdb.sql mysql:/root/
 docker exec -t mysql bash -c "mysql -uroot -p123456 < /root/tgdb.sql"
 ```

@@ -1,21 +1,19 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 155.248.178.177
+ Source Server         : 168.138.215.59
  Source Server Type    : MySQL
- Source Server Version : 50741 (5.7.41)
- Source Host           : 155.248.178.177:3306
+ Source Server Version : 80032 (8.0.32)
+ Source Host           : 168.138.215.59:3306
  Source Schema         : tgdb
 
  Target Server Type    : MySQL
- Target Server Version : 50741 (5.7.41)
+ Target Server Version : 80032 (8.0.32)
  File Encoding         : 65001
 
- Date: 09/02/2023 22:41:47
+ Date: 12/02/2023 16:37:46
 */
 
-CREATE DATABASE tgdb;
-USE tgdb;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -24,10 +22,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `text` varchar(15000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of message
