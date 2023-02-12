@@ -32,12 +32,13 @@ class Bot:
     async def save(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         if update.effective_user.id in authorized:
             if self.batch_save_mode:
-                text = update.message.text
+                text = update.message.text_markdown_v2_urled
+                print(text)
                 try:
                     self.db.save_to_database(text)
                     await context.bot.send_message(chat_id=update.effective_chat.id, text="Message saved.")
                 except Exception as e:
-                    print(e)
+                    await context.bot.send_message(chat_id=update.effective_chat.id, text=f"{e}")
 
     async def cancel(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         if update.effective_user.id in authorized:
@@ -56,15 +57,15 @@ class Bot:
                 result = self.db.search_in_database(context.args[0])
                 if result:
                     for message in result:
+                        con = rf"{message['id']}\. {message['text']}"
+                        print(con)
                         await context.bot.send_message(chat_id=update.effective_chat.id,
-                                                       text=f"_{message['id']}\. {message['text']}_",
+                                                       text=con,
                                                        parse_mode="MarkdownV2")
                 else:
-                    await context.bot.send_message(chat_id=update.effective_chat.id, text="No Messages.",
-                                                   parse_mode="MarkdownV2")
-            except IndexError as e:
-                await context.bot.send_message(chat_id=update.effective_chat.id, text="`Ex: /search Messages.`",
-                                               parse_mode="MarkdownV2")
+                    await context.bot.send_message(chat_id=update.effective_chat.id, text="No Messages.")
+            except Exception as e:
+                await context.bot.send_message(chat_id=update.effective_chat.id, text=f"{e}")
 
     async def random(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         if update.effective_user.id in authorized:
@@ -72,10 +73,12 @@ class Bot:
                 result = self.db.read_database()
                 if result:
                     for message in result:
+                        con = rf"{message['id']}\. {message['text']}"
+                        print(con)
                         await context.bot.send_message(chat_id=update.effective_chat.id,
-                                                       text=f"_{message['id']}\. {message['text']}_",
+                                                       text=con,
                                                        parse_mode="MarkdownV2")
                 else:
                     await context.bot.send_message(chat_id=update.effective_chat.id, text="No messages found.")
             except Exception as e:
-                await context.bot.send_message(chat_id=update.effective_chat.id, text=f"{e}", parse_mode="MarkdownV2")
+                await context.bot.send_message(chat_id=update.effective_chat.id, text=f"{e}")
