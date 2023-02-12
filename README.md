@@ -5,7 +5,7 @@
 ### Python Virtual Environment
 
 ```shell
-docker run -itd --name mysql -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7
+docker run -itd --name mysql -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql:8.0
 pip install virtualenv
 virtualenv venv
 # Windows：
