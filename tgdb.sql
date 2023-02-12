@@ -13,7 +13,8 @@
 
  Date: 12/02/2023 16:37:46
 */
-
+CREATE DATABASE tgdb;
+USE tgdb;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
