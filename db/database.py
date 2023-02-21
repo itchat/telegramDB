@@ -1,5 +1,5 @@
 from tools.logger import logger
-from config import conn
+from config import pool
 
 
 # Connect to database
@@ -10,7 +10,7 @@ class Database:
     def __new__(cls):
         if cls.instance is None:
             cls.instance = super().__new__(cls)
-            cls.conn = conn
+            cls.conn = pool.get_connection()
         return cls.instance
 
     def save_to_database(self, text):
@@ -18,7 +18,7 @@ class Database:
             with self.conn.cursor() as cursor:
                 sql = "INSERT INTO message (text) VALUES (%s)"
                 cursor.execute(sql, (text,))
-            conn.commit()
+            self.conn.commit()
         except Exception as e:
             logger.error("Error saving to database: %s", e, exc_info=True)
 
@@ -38,7 +38,7 @@ class Database:
             with self.conn.cursor() as cursor:
                 sql = "DELETE FROM message WHERE id = %s"
                 cursor.execute(sql, (record_id,))
-                conn.commit()
+                self.conn.commit()
         except Exception as e:
             logger.error("Error delete in database: %s", e, exc_info=True)
 

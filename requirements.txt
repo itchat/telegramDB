@@ -1,3 +1,4 @@
-pymysql
+pymysql~=1.0.2
 cryptography
-python-telegram-bot==20.0
+python-telegram-bot==20.1
+pymysql-pool
