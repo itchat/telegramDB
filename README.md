@@ -103,7 +103,8 @@ docker rmi $(docker images -q)
 
 # Create Backup task sh
 # Crontab
-0 0 * * * /bin/sh /opt/backup.sh
+chmod +x /opt/backup.sh                                                             
+0 0 * * * /bin/bash /opt/backup.sh
 docker exec -it mysql bash -c "mysqldump -uroot -p123456 tgdb > tgbackup.sql"
 docker cp mysql:tgbackup.sql /opt/backup
 ```
