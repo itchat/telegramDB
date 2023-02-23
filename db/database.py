@@ -14,6 +14,9 @@ class Database:
             self.conn.commit()
         except Exception as e:
             logger.error("Error saving to database: %s", e, exc_info=True)
+        # 线程回收到线程池
+        finally:
+            self.conn.close()
 
     def search_in_database(self, text):
         try:
@@ -25,6 +28,8 @@ class Database:
                 return result
         except Exception as e:
             logger.error("Error searching in database: %s", e, exc_info=True)
+        finally:
+            self.conn.close()
 
     def delete_record(self, record_id):
         try:
@@ -34,6 +39,8 @@ class Database:
                 self.conn.commit()
         except Exception as e:
             logger.error("Error delete in database: %s", e, exc_info=True)
+        finally:
+            self.conn.close()
 
     def read_database(self):
         try:
@@ -45,3 +52,5 @@ class Database:
                 return result
         except Exception as e:
             logger.error("Error read 10 random message in database: %s", e, exc_info=True)
+        finally:
+            self.conn.close()
