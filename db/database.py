@@ -11,7 +11,6 @@ class Database:
             with self.conn.cursor() as cursor:
                 sql = "INSERT INTO message (text) VALUES (%s)"
                 cursor.execute(sql, (text,))
-            self.conn.commit()
         except Exception as e:
             logger.error("Error saving to database: %s", e, exc_info=True)
         # 线程回收到线程池
@@ -36,7 +35,6 @@ class Database:
             with self.conn.cursor() as cursor:
                 sql = "DELETE FROM message WHERE id = %s"
                 cursor.execute(sql, (record_id,))
-                self.conn.commit()
         except Exception as e:
             logger.error("Error delete in database: %s", e, exc_info=True)
         finally:
