@@ -47,8 +47,11 @@ class Bot:
     async def delete(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         if update.effective_user.id in authorized:
             record_id = context.args[0]
-            self.db.delete_record(record_id)
-            await update.message.reply_text('Record {} deleted successfully.'.format(record_id))
+            try:
+                self.db.delete_record(record_id)
+                await update.message.reply_text('Record {} deleted successfully.'.format(record_id))
+            except Exception as e:
+                await context.bot.send_message(chat_id=update.effective_chat.id, text=f"{e}")
 
     async def search(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         if update.effective_user.id in authorized:
@@ -61,7 +64,7 @@ class Bot:
                                                        text=con,
                                                        parse_mode="MarkdownV2")
                 else:
-                    await context.bot.send_message(chat_id=update.effective_chat.id, text="No Messages.")
+                    raise Exception("No messages found")
             except Exception as e:
                 await context.bot.send_message(chat_id=update.effective_chat.id, text=f"{e}")
 
@@ -76,6 +79,6 @@ class Bot:
                                                        text=con,
                                                        parse_mode="MarkdownV2")
                 else:
-                    await context.bot.send_message(chat_id=update.effective_chat.id, text="No messages.")
+                    raise Exception("No messages found")
             except Exception as e:
                 await context.bot.send_message(chat_id=update.effective_chat.id, text=f"{e}")
